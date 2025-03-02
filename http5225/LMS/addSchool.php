@@ -1,3 +1,25 @@
+<?php
+if(isset($_POST['addSchool'])){
+  //print_r($_POST);
+  //Array ( [boardname] => Gary [language] => English [schooltype] => Private [addSchool] => )
+  $boardname = $_POST['boardname'];
+  $language = $_POST['language'];
+  $schooltype = $_POST['schooltype'];
+
+  include('reusables/connection.php');
+  $query = "INSERT INTO schools (`Board`, `Language`, `School Type`) VALUES('$boardname', '$language', '$schooltype')";
+  $school = mysqli_query($connect, $query);
+  if($school){
+    echo 'School added successfully.';
+  }
+  else{
+    echo 'Unable to add the school, Error code: ' . mysqli_error();
+  }
+
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,26 +40,26 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-      <form method="POST" action="addSchool.php"> 
-        <form method="POST" action="addschool.php">
-            <div class="mb-3">
-            <label for="boardname" class="form-label">Board Name</label>
-            <input type="text" class="form-control" name="boardname" id="boardname" aria-describedby="boardname">
-            </div>
+      <form method="POST" action="addschool.php">
+        <div class="mb-3">
+          <label for="boardname" class="form-label">Board Name</label>
+          <input type="text" class="form-control" name="boardname" id="boardname" aria-describedby="boardname">
+        </div>
 
-            <div class="mb-3">
-            <label for="language" class="form-label">Language</label>
-            <input type="text" class="form-control" name="language" id="language" aria-describedby="language">
-            </div>
+        <div class="mb-3">
+          <label for="language" class="form-label">Language</label>
+          <input type="text" class="form-control" name="language" id="language" aria-describedby="language">
+        </div>
 
-            <div class="mb-3">
-            <label for="schooltype" class="form-label">School Type</label>
-            <input type="text" class="form-control" name="schooltype" id="schooltype" aria-describedby="schooltype">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-3">
+          <label for="schooltype" class="form-label">School Type</label>
+          <input type="text" class="form-control" name="schooltype" id="schooltype" aria-describedby="schooltype">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" name="addSchool">Submit</button>
       </form>
       </div>
-  </div>  
+    </div>
+  </div>
 </body>
 </html>
