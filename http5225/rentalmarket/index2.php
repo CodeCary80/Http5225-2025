@@ -26,12 +26,17 @@
 
     <?php
 
-    //$servername = "sql101.infinityfree.com"; 
-    //$username = "if0_38431175"; 
-    //$password = "67xq3mkerJzI";
-    //$database = "if0_38431175_rent";
+    // Error reporting for debugging
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-    $connect = mysqli_connect('localhost', 'root', 'root', 'rent');
+    $servername = "sql101.infinityfree.com"; 
+    $username = "if0_38431175"; 
+    $password = "67xq3mkerJzI";
+    $database = "if0_38431175_rent";
+
+    $connect = mysqli_connect($servername, $username, $password, $database);
    
     if(!$connect){
         die("connection failed: " . mysqli_connect_error());
@@ -43,7 +48,6 @@
                 r.average_rent,
                 r.median_rent,
                 r.beds,
-                r.Link,
                 i.median_income,
                 ROUND((r.average_rent * 12) / i.median_income * 100, 2) AS rent_to_income_ratio
               FROM rentalmarkets r
